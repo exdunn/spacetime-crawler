@@ -6,6 +6,12 @@ from lxml import html,etree
 import re, os
 from time import time
 
+# Global Variables for Analytical Statistic:
+maximumLink = ""
+maximumNumber = 0
+totalNumberOfInvalidLinks = 0
+dictOfSubdomains = dict()
+
 try:
     # For python 2
     from urlparse import urlparse, parse_qs
@@ -96,8 +102,6 @@ def extract_next_links(rawDatas):
     for data in rawDatas:
         return
 
-
-
     return outputLinks
 
 def is_valid(url):
@@ -107,16 +111,46 @@ def is_valid(url):
 
     This is a great place to filter out crawler traps.
     '''
+
+    global totalNumberOfInvalidLinks
+
     parsed = urlparse(url)
-    if parsed.scheme not in set(["http", "https"]):
+    if parsed.scheme not in ["http", "https"]:
+        totalNumberOfInvalidLinks = totalNumberOfInvalidLinks +1
         return False
     try:
-        return ".ics.uci.edu" in parsed.hostname \
+        if is_bad_url(url):
+            totalNumberOfInvalidLinks = totalNumberOfInvalidLinks + 1
+            return False
+        isValid =  re.search(".ics.uci.edu" in parsed.hostname) \
             and not re.match(".*\.(css|js|bmp|gif|jpe?g|ico" + "|png|tiff?|mid|mp2|mp3|mp4"\
             + "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf" \
             + "|ps|eps|tex|ppt|pptx|doc|docx|xls|xlsx|names|data|dat|exe|bz2|tar|msi|bin|7z|psd|dmg|iso|epub|dll|cnf|tgz|sha1" \
             + "|thmx|mso|arff|rtf|jar|csv"\
             + "|rm|smil|wmv|swf|wma|zip|rar|gz)$", parsed.path.lower())
 
+        if isValid == False:
+            totalNumberOfInvalidLinks = totalNumberOfInvalidLinks + 1
+
+        return isValid
+
     except TypeError:
         print ("TypeError for ", parsed)
+
+
+def is_bad_url(url):
+    if url.startswith("#"):
+        return True
+    if url.startswith("javascript"):
+        return True
+    if url.startswith("mailto:"):
+        return True
+    if url.find('.h5') != -1:
+        return True
+    if url.find('doku.php') != -1:
+        return True
+
+    # TRAP LINKS
+
+    if url.startswith("http://calendar.ics.uci.edu"):
+        return True
