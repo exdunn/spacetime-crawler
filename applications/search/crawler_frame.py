@@ -161,6 +161,7 @@ def is_valid(url):
     This is a great place to filter out crawler traps.
     '''
 
+    print 'url', url
     global totalNumberOfInvalidLinks
 
     parsed = urlparse(url)
@@ -171,16 +172,19 @@ def is_valid(url):
         if is_bad_url(url):
             totalNumberOfInvalidLinks = totalNumberOfInvalidLinks + 1
             return False
-        isValid =  re.search(".ics.uci.edu" in parsed.hostname) \
-            and not re.match(".*\.(css|js|bmp|gif|jpe?g|ico" + "|png|tiff?|mid|mp2|mp3|mp4"\
-            + "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf" \
-            + "|ps|eps|tex|ppt|pptx|doc|docx|xls|xlsx|names|data|dat|exe|bz2|tar|msi|bin|7z|psd|dmg|iso|epub|dll|cnf|tgz|sha1" \
-            + "|thmx|mso|arff|rtf|jar|csv"\
-            + "|rm|smil|wmv|swf|wma|zip|rar|gz)$", parsed.path.lower())
+
+        isValid = re.search("\.ics\.uci\.edu\.?$", parsed.hostname) \
+                  and not re.match(".*\.(css|js|bmp|gif|jpe?g|ico" + "|png|tiff?|mid|mp2|mp3|mp4" \
+                                   + "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf|h5" \
+                                   + "|ps|eps|tex|ppt|pptx|doc|docx|xls|xlsx|names|data|dat|exe|bz2|tar|msi|bin|7z|psd|dmg|iso|epub|dll|cnf|tgz|sha1" \
+                                   + "|thmx|mso|arff|rtf|jar|csv" \
+                                   + "|rm|smil|wmv|swf|wma|zip|rar|gz)$", parsed.path.lower())
 
         if isValid == False:
             totalNumberOfInvalidLinks = totalNumberOfInvalidLinks + 1
 
+        if isValid:
+            print 'IS VALID YAY'
         return isValid
 
     except TypeError:
