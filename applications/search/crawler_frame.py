@@ -99,9 +99,58 @@ def extract_next_links(rawDatas):
     Suggested library: lxml
     '''
 
-    for data in rawDatas:
-        return
+    print "##### EXTRACTING NEXT LINKS #####"
+    print "##### Raw Data Info #####"
+    print "Raw Data Length: ", len(rawDatas)
 
+    for data in rawDatas:
+        print "##### Data Info #####"
+        print "URL: ", data.url.encode('utf-8')
+        print "Is Redirected?: ", data.is_redirected
+        print "Final URL: ", data.final_url.encode('utf-8')
+        print "Error: ", data.error_message
+        print "HTTP Code: ", data.http_code
+
+        # Parse the url
+        print "##### Parsing URL #####"
+        url = data.final_url if data.is_redirected else data.url
+        parsed_url = urlparse(url)
+        print "Parsed URL: ", parsed_url
+        # Parse the data
+
+        # Check if there is an error
+        print "##### Checking for error message #####"
+        if data.error_message:
+            print "Setting Bad URL to True"
+            # There is an error.
+            # Set bad url, and not do anything
+            data.bad_url = True
+        elif data.http_code == 200:
+            print "##### Parsing Data #####"
+            # There is no error, and everything is OK
+            # Try to parse the data
+            try:
+                parsed_data = html.document_fromstring(data.content)
+                print "Parsed Data: ", parsed_data
+            except etree.ParserError:
+                print "Parser Error"
+                continue # Formerly return
+            except etree.XMLSyntaxError:
+                print "XML Syntax Error"
+                continue # Formerly return
+
+            print "##### Searching data #####"
+            # Go through every link in the data
+            for _, _, link, _ in parsed_data.iterlinks():
+                print "Link: ", link
+                # Make link absolute
+                print "##### Making url absolute #####"
+                base_url = parsed_url.scheme + "://" + parsed_url.netloc
+                print "Base URL: ", base_url
+                abs_url = urljoin(base_url, link)
+                print "Absolute URL: ", abs_url
+
+                outputLinks.append(abs_url)
     return outputLinks
 
 def is_valid(url):
