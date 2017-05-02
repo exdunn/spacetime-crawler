@@ -1,0 +1,29 @@
+
+
+05-02-2017 14:49:17
+# Successful Downloads: 0
+# Invalid: 1
+Most Outgoing Link: 
+# Outgoing Links: 0
+
+Subdomains 
+
+
+05-02-2017 14:52:48
+# Successful Downloads: 0
+# Invalid: 154
+Most Outgoing Link: 
+# Outgoing Links: 0
+
+Subdomains 
+
+
+05-02-2017 14:53:04
+# Successful Downloads: 0
+# Invalid: 4
+Most Outgoing Link: 
+# Outgoing Links: 0
+
+Subdomains 
+
+

@@ -12,9 +12,26 @@ maximumNumber = 0
 totalNumberOfInvalidLinks = 0
 dictOfSubdomains = dict()
 
+# Keys to Global Dict
+DL_COUNT = 'dl_count'
+MAX_LINK = 'max_link'
+MAX_COUNT = 'max_count'
+INVALID_COUNT = 'invalid_count'
+SUB_DOMAINS = 'sub_domains'
+
+
+Analytics = {
+    DL_COUNT: 0,
+    MAX_LINK: "",
+    MAX_COUNT: 0,
+    INVALID_COUNT: 0,
+    SUB_DOMAINS: dict()
+}
+
+
 try:
     # For python 2
-    from urlparse import urlparse, parse_qs
+    from urlparse import urlparse, parse_qs, urljoin
 except ImportError:
     # For python 3
     from urllib.parse import urlparse, parse_qs
@@ -67,6 +84,7 @@ class CrawlerFrame(IApplication):
 
     def shutdown(self):
         print "downloaded ", len(url_count), " in ", time() - self.starttime, " seconds."
+        to_file()
         pass
 
 def save_count(urls):
@@ -99,39 +117,47 @@ def extract_next_links(rawDatas):
     Suggested library: lxml
     '''
 
-    print "##### EXTRACTING NEXT LINKS #####"
-    print "##### Raw Data Info #####"
-    print "Raw Data Length: ", len(rawDatas)
+    # print "##### EXTRACTING NEXT LINKS #####"
+    # print "##### Raw Data Info #####"
+    # print "Raw Data Length: ", len(rawDatas)
 
     for data in rawDatas:
-        print "##### Data Info #####"
+        global Analytics
+        # print "##### Data Info #####"
         print "URL: ", data.url.encode('utf-8')
         print "Is Redirected?: ", data.is_redirected
-        print "Final URL: ", data.final_url.encode('utf-8')
+        print "Final URL: ", data.final_url.encode('utf-8') if data.is_redirected else "None"
         print "Error: ", data.error_message
-        print "HTTP Code: ", data.http_code
+        print "HTTP Code: |", data.http_code, "|"
 
         # Parse the url
-        print "##### Parsing URL #####"
+        # print "##### Parsing URL #####"
         url = data.final_url if data.is_redirected else data.url
         parsed_url = urlparse(url)
         print "Parsed URL: ", parsed_url
         # Parse the data
 
+        if parsed_url.hostname in Analytics[SUB_DOMAINS]:
+            Analytics[SUB_DOMAINS][parsed_url.hostname] += 1
+        else:
+            Analytics[SUB_DOMAINS][parsed_url.hostname] = 0
+        Analytic[DL_COUNT] += 1
+
+
         # Check if there is an error
-        print "##### Checking for error message #####"
+        # print "##### Checking for error message #####"
         if data.error_message:
             print "Setting Bad URL to True"
             # There is an error.
             # Set bad url, and not do anything
             data.bad_url = True
-        elif data.http_code == 200:
-            print "##### Parsing Data #####"
+        elif int(data.http_code) == 200:
+            # print "##### Parsing Data #####"
             # There is no error, and everything is OK
             # Try to parse the data
             try:
                 parsed_data = html.document_fromstring(data.content)
-                print "Parsed Data: ", parsed_data
+                # print "Parsed Data: ", parsed_data
             except etree.ParserError:
                 print "Parser Error"
                 continue # Formerly return
@@ -139,18 +165,28 @@ def extract_next_links(rawDatas):
                 print "XML Syntax Error"
                 continue # Formerly return
 
-            print "##### Searching data #####"
+            # print "##### Searching data #####"
             # Go through every link in the data
             for _, _, link, _ in parsed_data.iterlinks():
                 print "Link: ", link
                 # Make link absolute
-                print "##### Making url absolute #####"
+                # print "##### Making url absolute #####"
                 base_url = parsed_url.scheme + "://" + parsed_url.netloc
-                print "Base URL: ", base_url
+                # print "Base URL: ", base_url
                 abs_url = urljoin(base_url, link)
                 print "Absolute URL: ", abs_url
 
+
                 outputLinks.append(abs_url)
+        else:
+            data.bad_url = True
+
+    if len(outputLinks) > Analytics[MAX_COUNT]:
+        Analytics[MAX_COUNT] = len(outputLinks)
+        Analytics[MAX_LINK] = url
+    # print "##### OUTPUT LINKS #####"
+    print outputLinks
+    # raw_input()
     return outputLinks
 
 def is_valid(url):
@@ -162,17 +198,16 @@ def is_valid(url):
     '''
 
     print 'url', url
-    global totalNumberOfInvalidLinks
+    global Analytic
 
-    parsed = urlparse(url)
-    if parsed.scheme not in ["http", "https"]:
-        totalNumberOfInvalidLinks = totalNumberOfInvalidLinks +1
-        return False
     try:
-        if is_bad_url(url):
-            totalNumberOfInvalidLinks = totalNumberOfInvalidLinks + 1
+        parsed = urlparse(url)
+        if parsed.scheme not in ["http", "https"]:
+            Analytics[INVALID_COUNT] += 1
             return False
-
+        if is_bad_url(url):
+            Analytics[INVALID_COUNT] += 1
+            return False
         isValid = re.search("\.ics\.uci\.edu\.?$", parsed.hostname) \
                   and not re.match(".*\.(css|js|bmp|gif|jpe?g|ico" + "|png|tiff?|mid|mp2|mp3|mp4" \
                                    + "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf|h5" \
@@ -180,10 +215,9 @@ def is_valid(url):
                                    + "|thmx|mso|arff|rtf|jar|csv" \
                                    + "|rm|smil|wmv|swf|wma|zip|rar|gz)$", parsed.path.lower())
 
-        if isValid == False:
-            totalNumberOfInvalidLinks = totalNumberOfInvalidLinks + 1
-
-        if isValid:
+        if not isValid:
+            Analytics[INVALID_COUNT] += 1
+        else:
             print 'IS VALID YAY'
         return isValid
 
@@ -198,12 +232,34 @@ def is_bad_url(url):
         return True
     if url.startswith("mailto:"):
         return True
-    if url.find('.h5') != -1:
-        return True
     if url.find('doku.php') != -1:
         return True
-
+    if url.find('?') != -1:
+        return True
+    if url.count('.php') > 1:
+        return True
+    if url.find('.phphttp') != -1:
+        return True
     # TRAP LINKS
 
     if url.startswith("http://calendar.ics.uci.edu"):
         return True
+
+def to_file():
+    print "Analytics to File"
+    global Analytics
+    import datetime
+    with open('analytics.txt', 'a') as out:
+        date = datetime.datetime.fromtimestamp(time()).strftime('%m-%d-%Y %H:%M:%S')
+        out.writelines(date + '\n')
+        out.writelines("# Successful Downloads: " + str(Analytics[DL_COUNT]) + '\n')
+        out.writelines('# Invalid: ' + str(Analytics[INVALID_COUNT]) + '\n')
+        out.writelines('Most Outgoing Link: ' + Analytics[MAX_LINK] + '\n')
+        out.writelines('# Outgoing Links: ' + str(Analytics[MAX_COUNT]) + '\n')
+
+        out.writelines('\n')
+        out.writelines('Subdomains \n')
+        for sub, links in Analytics[SUB_DOMAINS].iteritems():
+            out.writelines(str(sub) + ": " + str(links) + '\n')
+
+        out.writelines('\n\n')
