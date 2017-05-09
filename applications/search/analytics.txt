@@ -1,29 +1,300 @@
-
-
-05-02-2017 14:49:17
+05-08-2017 20:09:21
 # Successful Downloads: 0
+# Invalid: 76
+# Most Outgoing Link: 
+# Outgoing Links: 0
+
+Subdomains 
+
+Other Stats 
+# Number of Image Files: 9
+# Number of Video Files: 0
+# Number of Audio Files: 0
+# Number of Document Files: 0
+# Number of Misc. Files: 0
+# Number of JS Files: 0
+# Number of CSS Files: 0
+
+
+05-08-2017 20:20:26
+# Successful Downloads: 0
+# Invalid: 187
+# Most Outgoing Link: 
+# Outgoing Links: 0
+
+Subdomains 
+
+Other Stats 
+# Number of Image Files: 16
+# Number of Video Files: 0
+# Number of Audio Files: 0
+# Number of Document Files: 2
+# Number of Misc. Files: 0
+# Number of JS Files: 0
+# Number of CSS Files: 0
+
+
+05-08-2017 20:46:06
+# Successful Downloads: 21
+# Invalid: 3
+# Most Outgoing Link: 
+# Outgoing Links: 0
+
+Subdomains 
+flamingo.ics.uci.edu: 21
+
+Other Stats 
+# Number of Image Files: 0
+# Number of Video Files: 0
+# Number of Audio Files: 0
+# Number of Document Files: 0
+# Number of Misc. Files: 0
+# Number of JS Files: 0
+# Number of CSS Files: 0
+
+
+05-08-2017 20:48:40
+# Successful Downloads: 8
+# Invalid: 0
+# Most Outgoing Link: 
+# Outgoing Links: 0
+
+Subdomains 
+www.ics.uci.edu: 1
+flamingo.ics.uci.edu: 7
+
+Other Stats 
+# Number of Image Files: 0
+# Number of Video Files: 0
+# Number of Audio Files: 0
+# Number of Document Files: 0
+# Number of Misc. Files: 0
+# Number of JS Files: 0
+# Number of CSS Files: 0
+
+
+05-08-2017 20:53:29
+# Successful Downloads: 17
+# Invalid: 0
+# Most Outgoing Link: http://www.ics.uci.edu/community/news/notes/index
+# Outgoing Links: 83
+
+Subdomains 
+grape.ics.uci.edu: 9
+chime.ics.uci.edu: 1
+asterix.ics.uci.edu: 1
+hobbes.ics.uci.edu: 2
+jujube.ics.uci.edu: 1
+www.ics.uci.edu: 3
+
+Other Stats 
+# Number of Image Files: 0
+# Number of Video Files: 0
+# Number of Audio Files: 0
+# Number of Document Files: 0
+# Number of Misc. Files: 0
+# Number of JS Files: 0
+# Number of CSS Files: 0
+
+
+05-08-2017 21:06:37
+# Successful Downloads: 537
+# Invalid: 3
+# Most Outgoing Link: http://fano.ics.uci.edu/cites/Author/
+# Outgoing Links: 2379
+
+Subdomains 
+fano.ics.uci.edu: 464
+www.ics.uci.edu: 73
+
+Other Stats 
+# Number of Image Files: 0
+# Number of Video Files: 0
+# Number of Audio Files: 0
+# Number of Document Files: 0
+# Number of Misc. Files: 0
+# Number of JS Files: 0
+# Number of CSS Files: 0
+
+
+05-08-2017 21:29:31
+# Successful Downloads: 852
+# Invalid: 59
+# Most Outgoing Link: http://www.ics.uci.edu/~ihler/pubs.html
+# Outgoing Links: 309
+# Least Outgoing Link: http://fano.ics.uci.edu/cites/FolMit-IMR-98.html
+# Outgoing Links: 0
+
+Subdomains 
+graphmod.ics.uci.edu: 183
+cml.ics.uci.edu: 18
+fano.ics.uci.edu: 483
+www.ics.uci.edu: 132
+sli.ics.uci.edu: 36
+
+Other Stats 
+# Number of Image Files: 17
+# Number of Video Files: 0
+# Number of Audio Files: 0
+# Number of Document Files: 20
+# Number of Misc. Files: 11
+# Number of JS Files: 0
+# Number of CSS Files: 0
+
+
+05-08-2017 21:31:14
+# Successful Downloads: 8
+# Invalid: 0
+# Most Outgoing Link: http://www.ics.uci.edu/~eppstein/163/w13.html
+# Outgoing Links: 40
+# Least Outgoing Link: http://www.ics.uci.edu/selfrando-press-release.txt
+# Outgoing Links: 0
+
+Subdomains 
+fano.ics.uci.edu: 6
+www.ics.uci.edu: 2
+
+Other Stats 
+# Number of Image Files: 0
+# Number of Video Files: 0
+# Number of Audio Files: 0
+# Number of Document Files: 0
+# Number of Misc. Files: 0
+# Number of JS Files: 0
+# Number of CSS Files: 0
+
+
+05-08-2017 21:34:44
+# Successful Downloads: 20
 # Invalid: 1
-Most Outgoing Link: 
+# Most Outgoing Link: http://graphmod.ics.uci.edu/uai08/HelpOnActions/AttachFile?action=info
+# Outgoing Links: 38
+# Least Outgoing Link: http://fano.ics.uci.edu/cites/Douglas-R-Stinson.html
 # Outgoing Links: 0
 
 Subdomains 
+graphmod.ics.uci.edu : 2
+www.ics.uci.edu : 2
+fano.ics.uci.edu : 16
+
+Other Stats 
+# Number of Image Files: 0
+# Number of Video Files: 0
+# Number of Audio Files: 0
+# Number of Document Files: 1
+# Number of Misc. Files: 0
+# Number of JS Files: 0
+# Number of CSS Files: 0
 
 
-05-02-2017 14:52:48
+05-08-2017 21:55:58
+# Successful Downloads: 20
+# Invalid: 5
+# Most Outgoing Link: http://graphmod.ics.uci.edu/group/Ergo_file_format?action=diff&rev1=1&rev2=9
+# Outgoing Links: 46
+# Least Outgoing Link: http://graphmod.ics.uci.edu/uai08/HelpOnMacros/MonthCalendar/2017-04-12
+# Outgoing Links: 0
+
+Subdomains 
+graphmod.ics.uci.edu : 5
+www.ics.uci.edu : 2
+fano.ics.uci.edu : 12
+sli.ics.uci.edu : 1
+
+Other Stats 
+# Number of Image Files: 0
+# Number of Video Files: 0
+# Number of Audio Files: 0
+# Number of Document Files: 0
+# Number of Misc. Files: 5
+# Number of JS Files: 0
+# Number of CSS Files: 0
+# Number of Code Files: 0
+
+
+05-08-2017 22:11:50
 # Successful Downloads: 0
-# Invalid: 154
-Most Outgoing Link: 
+# Invalid Links: 0
+# Most Outgoing Link: 
 # Outgoing Links: 0
+# Least Outgoing Link: 
+# Outgoing Links: -1
 
 Subdomains 
 
+Other Stats 
+# Number of Image Files: 0
+# Number of Video Files: 0
+# Number of Audio Files: 0
+# Number of Document Files: 0
+# Number of Misc. Files: 0
+# Number of JS Files: 0
+# Number of CSS Files: 0
+# Number of Code Files: 0
 
-05-02-2017 14:53:04
+
+05-08-2017 22:12:36
 # Successful Downloads: 0
-# Invalid: 4
-Most Outgoing Link: 
+# Invalid Links: 0
+# Most Outgoing Link: 
+# Outgoing Links: 0
+# Least Outgoing Link: 
+# Outgoing Links: -1
+
+Subdomains 
+
+Other Stats 
+# Number of Image Files: 0
+# Number of Video Files: 0
+# Number of Audio Files: 0
+# Number of Document Files: 0
+# Number of Misc. Files: 0
+# Number of JS Files: 0
+# Number of CSS Files: 0
+# Number of Code Files: 0
+
+
+05-08-2017 22:13:20
+# Successful Downloads: 8
+# Invalid Links: 0
+# Most Outgoing Link: http://www.ics.uci.edu/~eppstein/pix/uhgrads/169.html
+# Outgoing Links: 3
+# Least Outgoing Link: http://www.ics.uci.edu/~eppstein/pix/uhgrads/64.html
+# Outgoing Links: 3
+
+Subdomains 
+www.ics.uci.edu : 8
+
+Other Stats 
+# Number of Image Files: 0
+# Number of Video Files: 0
+# Number of Audio Files: 0
+# Number of Document Files: 0
+# Number of Misc. Files: 0
+# Number of JS Files: 0
+# Number of CSS Files: 0
+# Number of Code Files: 0
+
+
+05-08-2017 22:23:14
+# Successful Downloads: 4
+# Invalid Links: 0
+# Most Outgoing Link: http://graphmod.ics.uci.edu/uai08/Evaluation/Report?action=recall&rev=13
+# Outgoing Links: 40
+# Least Outgoing Link: http://graphmod.ics.uci.edu/uai08/Workshop?action=diff&rev1=11&rev2=12
 # Outgoing Links: 0
 
 Subdomains 
+graphmod.ics.uci.edu : 4
+
+Other Stats 
+# Number of Image Files: 0
+# Number of Video Files: 0
+# Number of Audio Files: 0
+# Number of Document Files: 0
+# Number of Misc. Files: 0
+# Number of JS Files: 0
+# Number of CSS Files: 0
+# Number of Code Files: 0
 
 
